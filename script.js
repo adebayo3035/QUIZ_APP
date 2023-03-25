@@ -41,7 +41,7 @@ const questions = [
 ];
 
 const questionElement = document.getElementById("question")
-const answerButton = document.getElementById("answer-buttons")
+const answerButtons = document.getElementById("answer-buttons")
 const nextButton = document.getElementById("next-btn")
 
 //calculate sccore
@@ -55,6 +55,7 @@ const startQuiz = () =>{
     showQuestion();
 }
 const showQuestion = () =>{
+    resetState()
     let currentQuestion = questions[currentQuestionIndex];
     let questionNumber = currentQuestionIndex + 1;
     questionElement.textContent = `${questionNumber}.  ${currentQuestion.question}`
@@ -64,6 +65,15 @@ const showQuestion = () =>{
         const button = document.createElement("button")
         button.textContent = answer.text;
         button.classList.add('btn')
-        answerButton.appendChild(button)
+        answerButtons.appendChild(button)
     })
 }
+// Reset previous question
+const resetState = () =>{
+    nextButton.style.display = "none"
+    while(answerButtons.firstChild){
+        answerButtons.removeChild(answerButtons.firstChild)
+    }
+}
+//call startQuiz function
+startQuiz();
